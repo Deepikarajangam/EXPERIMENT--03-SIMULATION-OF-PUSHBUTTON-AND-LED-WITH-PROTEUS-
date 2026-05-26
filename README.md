@@ -72,12 +72,35 @@ We are now at the last part of step by step guide on how to simulate STM32 proje
 
 ## STM 32 CUBE PROGRAM :
 ```
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+#include "main.h"
+#include "stdbool.h"
+bool button;
+void led_blink();
+
+while (1)
+  {
+	  /* USER CODE END WHILE */
+	  led_blink();
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+void led_blink()
 {
-    if (GPIO_Pin == GPIO_PIN_0)
-    {
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    }
+	button=HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0);
+	if(button==0)
+	{
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+		HAL_Delay(1000);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+		HAL_Delay(1000);
+	}
 }
 ```
 
@@ -85,8 +108,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 ## Output screen shots of proteus  :
 
-<img width="1099" height="717" alt="image" src="https://github.com/user-attachments/assets/f0ab095b-6f56-42cf-9633-0573ef8076b4" />
 
+<img width="933" height="774" alt="image" src="https://github.com/user-attachments/assets/e6d982e0-d19a-4aab-b86c-269ef012d86a" />
+
+<img width="985" height="778" alt="Screenshot 2026-05-26 212510" src="https://github.com/user-attachments/assets/db3eeb3d-6274-45c9-bf5a-cdb58bdb228e" />
 
 
 
